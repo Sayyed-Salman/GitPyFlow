@@ -6,7 +6,7 @@ def create_app(config=None):
 
     @app.route('/')
     def index():
-        return 'Hello World'
+        return 'Hello Flask!'
 
     @app.route('/add/<int:num1>/<int:num2>')
     def add(num1, num2):

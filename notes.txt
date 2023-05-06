@@ -30,3 +30,5 @@ article :
 
 
 references :
+
+https://replicate.com/nightmareai/real-esrgan
