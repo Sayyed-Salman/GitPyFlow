@@ -34,7 +34,7 @@ Create a new directory and create a file named `__init__.py` in it.
 
 Directory structure:
 
-![](/images/finalDirstructure.png)
+![DirectoryStructure](/images/finalDirstructure.png)
 
 Add the following code to the file:
 
@@ -142,11 +142,11 @@ Not only do we want to deploy the application, but we also want to test it.
 
 Go to "Actions" tab and find "Python Applications".
 
-![](./images/actionsTab.png)
+![GithubActions](./images/actionsTab.png)
 
 Find "Python application" and click on "Configure"
 
-![](./images/configureActions.png)
+![ConfigureActions](./images/configureActions.png)
 
 This will create a workflow file in the `.github/workflows` directory.
 Edit this file to customize the workflow.
@@ -223,7 +223,7 @@ Go to GitHub and create a pull request.
 Merge the pull request.
 It will trigger the workflow and the tests will be executed.The workflow executed successfully.
 
-![](./images/firstrun.png)
+![FirstRun](./images/firstrun.png)
 
 To break the workflow, change the `add` function to return the wrong result.
 
@@ -242,7 +242,7 @@ import requests
 
 This will cause the workflow to fail.
 
-![](./images/secondrun.png)
+![SecondRun](./images/secondrun.png)
 
 ## Deploying the application on Render
 
@@ -255,29 +255,33 @@ This will cause the workflow to fail.
 If you signed up with GitHub, you will see a list of your repositories.
 Select the repository you want to deploy.
 
-![](./images/render/firstStepCreateService.png)
+![CreateService](./images/render/firstStepCreateService.png)
 
 4. Select the GitHub repository.
 5. Select the branch.
-   Fill in the fields.
-   ![](./images/render/secondStepSelectBranch.png)
+
+Fill in the fields.
+
+![SelectBranch](./images/render/secondStepSelectBranch.png)
 
 6. Select the environment.
 
 Select an environment from the list.
-![](./images/render/thirdStepSelectEnv.png)
+![ChooseEnvironment](./images/render/thirdStepSelectEnv.png)
 
 7. Select the start command.
    Start command is the command that will be executed when the application starts.
    It is the Flask app entry point it creates the Flask app object and runs it.
 
-![](./images/render/fourthStepStartCommand.png)
+![StartCommand](./images/render/fourthStepStartCommand.png)
 
 Render will automatically detect the start command if you have a `Procfile` in the root directory.
 If you don't have a `Procfile`, you can create one and add the start command to it.
 
+Add guincorn to the `requirements.txt` file.
+
 ```txt
-web: gunicorn app:app
+web: gunicorn wsgi:app
 ```
 
 This is CD part of the CI/CD pipeline. It will automatically deploy the application when you push changes to the repository.
