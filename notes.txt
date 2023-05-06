@@ -1,0 +1,32 @@
+title : 
+	Deploying on github with github actions 
+	Deploying a python application with on github with github actions
+	Setting up GitHub Actions for python applications
+
+
+article :
+
+	Pre Requisites 
+		- Github 
+		- render
+		- python
+	
+	
+	Introduction.
+		Intro
+		Github Actions.
+		 - What is github actions ?
+		 - What is  CI/CD ?
+
+
+	Setting up a workflow for python application.
+		- Create a flask app.
+		- Push it on github.
+		- Select a workflow from Actions tab.
+		- Test it with a new commit.
+	
+	Deploy it on render.
+
+
+
+references :
