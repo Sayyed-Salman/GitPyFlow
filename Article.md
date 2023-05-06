@@ -20,6 +20,12 @@ Continuous Integration and Continuous Deployment (CI/CD) is a software engineeri
 - GitHub account
 - [render](https://render.com/) account
 
+### Install libraries
+
+```bash
+pip install flask pytest
+```
+
 ## Setting up a workflow for a python application
 
 #### 1) Create a flask application
@@ -28,7 +34,7 @@ Create a new directory and create a file named `__init__.py` in it.
 
 Directory structure:
 
-![](/images/filestructure.png)
+![](/images/finalDirstructure.png)
 
 Add the following code to the file:
 
@@ -237,6 +243,44 @@ import requests
 This will cause the workflow to fail.
 
 ![](./images/secondrun.png)
+
+## Deploying the application on Render
+
+1. Create a new account on Render.
+
+2. Link your GitHub account to Render.
+
+3. Create a new web service.
+
+If you signed up with GitHub, you will see a list of your repositories.
+Select the repository you want to deploy.
+
+![](./images/render/firstStepCreateService.png)
+
+4. Select the GitHub repository.
+5. Select the branch.
+   Fill in the fields.
+   ![](./images/render/secondStepSelectBranch.png)
+
+6. Select the environment.
+
+Select an environment from the list.
+![](./images/render/thirdStepSelectEnv.png)
+
+7. Select the start command.
+   Start command is the command that will be executed when the application starts.
+   It is the Flask app entry point it creates the Flask app object and runs it.
+
+![](./images/render/fourthStepStartCommand.png)
+
+Render will automatically detect the start command if you have a `Procfile` in the root directory.
+If you don't have a `Procfile`, you can create one and add the start command to it.
+
+```txt
+web: gunicorn app:app
+```
+
+This is CD part of the CI/CD pipeline. It will automatically deploy the application when you push changes to the repository.
 
 ## Conclusion
 
