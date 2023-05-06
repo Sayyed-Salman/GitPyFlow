@@ -134,4 +134,84 @@ Not only do we want to deploy the application, but we also want to test it.
 
 #### 3) Create a workflow file
 
+Go to "Actions" tab and find "Python Applications".
+
+![](./images/actionsTab.png)
+
+Find "Python application" and click on "Configure"
+
+![](./images/configureActions.png)
+
+This will create a workflow file in the `.github/workflows` directory.
+Edit this file to customize the workflow.
+
+```yaml
+name: Python application
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Test with pytest
+        run: |
+          pytest
+```
+
+This workflow will run on every push and pull request on the `main` branch.
+It will install the dependencies and run the tests.
+If the tests fail, the workflow will fail.
+This is a very simple workflow, but it can be customized to do more complex tasks.
+
 #### 4) Test it
+
+1. Create a new branch and make some changes to the code.
+
+Go ahead and make some changes to the code. For example, you can change the `index` function to return "Hello Flask!" instead of "Hello World".
+
+```python
+@app.route('/')
+def index():
+    return 'Hello Flask!'
+```
+
+Create a new branch and push the changes to the repository.
+
+```bash
+git checkout -b new-branch
+git add .
+git commit -m "change index function"
+git push origin new-branch
+```
+
+Go to GitHub and create a pull request.
+Merge the pull request.
+It will trigger the workflow and the tests will be executed.
+
+2. Create a pull request.
+3. The workflow will run and the tests will be executed.
