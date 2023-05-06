@@ -200,6 +200,8 @@ def index():
     return 'Hello Flask!'
 ```
 
+2. Create a pull request.
+
 Create a new branch and push the changes to the repository.
 
 ```bash
@@ -209,9 +211,33 @@ git commit -m "change index function"
 git push origin new-branch
 ```
 
+3. The workflow will run and the tests will be executed.
+
 Go to GitHub and create a pull request.
 Merge the pull request.
-It will trigger the workflow and the tests will be executed.
+It will trigger the workflow and the tests will be executed.The workflow executed successfully.
 
-2. Create a pull request.
-3. The workflow will run and the tests will be executed.
+![](./images/firstrun.png)
+
+To break the workflow, change the `add` function to return the wrong result.
+
+```python
+@app.route('/add/<int:num1>/<int:num2>')
+def add(num1, num2):
+    return f"{num1} + {num2} = {num1 + num2 + 1}"
+```
+
+There is another way to break the workflow.
+Import a library that is not in the `requirements.txt` file.
+
+```python
+import requests
+```
+
+This will cause the workflow to fail.
+
+![](./images/secondrun.png)
+
+## Conclusion
+
+In conclusion, using GitHub Actions to set up a CI/CD pipeline for your Python application can make your development process smoother and more efficient. With GitHub Actions, you can automate the process of testing, building, and deploying your application, saving you time and effort. Once you've set up your pipeline, you can easily push updates to your application and have them automatically built and deployed. Plus, by using Render to deploy your application, you can easily share it with others and make it accessible to anyone with an internet connection. So if you're looking for a way to streamline your Python application's development process, give GitHub Actions and Render a try and see how they can help you simplify your workflow.
